@@ -1,0 +1,114 @@
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{fancyvrb}
+
+\title{Managing Dependencies}
+\subtitle{Almost, But Not Quite, Bleeding Edge}
+\author{Moshe Zadka -- https://cobordism.com}
+\date{Pyninsula December 2018}
+ 
+\begin{document}
+ 
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+\frametitle{Scope}
+
+Deployed projects
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Deployment artifacts}
+
+\begin{itemize}
+\item Build-packs
+\item Docker
+\item Pex
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Creation}
+
+\begin{lstlisting}
+$ pip install -r requirements.txt
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Input}
+
+\begin{lstlisting}
+# requirements.in
+.
+gunicorn
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Input}
+
+\begin{lstlisting}
+# setup.py
+#...
+    "flask>=1.0",
+#...
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Output}
+
+\begin{lstlisting}
+# requirements.txt
+flask==1.0.2 # (with hashes)
+...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Process}
+
+\begin{lstlisting}
+$ pip-compile \
+  --generate-hashes \
+  requirements.in \
+  > requirements.txt
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{When?}
+
+\begin{itemize}
+\item At least once a month
+\item At most once a day
+\item Schedule!
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+
+\begin{itemize}
+\item Intent vs Actual
+\item Keep near the edge
+\item Add constraints to intent
+\end{itemize}
+
+\end{frame}
+
+
+\end{document}
